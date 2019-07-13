@@ -21,6 +21,7 @@ class CreateListingsTable extends Migration
             $table->integer('quantity');
             $table->integer('status')->default(0);
             $table->timestamp('expires_at')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
 //            $table->foreign('seller_id')->references('id')->on('users');

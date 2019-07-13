@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class UploadController extends AppBaseController
 {
-    public function uploadToS3(Request $request)
+    public function upload(Request $request)
     {
         if (!$request->has('file')) {
             return $this->sendError('No files found');

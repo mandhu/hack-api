@@ -8,7 +8,6 @@ use App\Models\Listing;
 use App\Models\Promotion;
 use App\Repositories\ListingRepository;
 use App\Repositories\PromotionRepository;
-use App\Traits\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -20,8 +19,6 @@ use Response;
 
 class ListingAPIController extends AppBaseController
 {
-    use Auth;
-
     /** @var  ListingRepository */
     private $listingRepository;
 
@@ -66,6 +63,7 @@ class ListingAPIController extends AppBaseController
 
         $input['seller_id'] = $this->getAuthUser(3);
         $input['status'] = 'Active';
+        $input['expires_at'] = now()->addDays(2);
 
         $listing = $this->listingRepository->create($input);
 
@@ -158,5 +156,12 @@ class ListingAPIController extends AppBaseController
         $listing->save();
 
         return $this->sendResponse($listing, 'Listing Cancelled');
+    }
+
+    public function listingsByUser($user_id)
+    {
+        $listings = Listing::where('seller_id', $user_id)->all();
+
+        return $this->sendResponse($listings, 'Listings retrieved successfully');
     }
 }

@@ -55,6 +55,7 @@ class TransferAPIController extends AppBaseController
     public function store(CreateTransferAPIRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = $this->getAuthUser(request('type') == 'Deposit' ? 2 : 3);
 
         $transfer = $this->transferRepository->create($input);
 

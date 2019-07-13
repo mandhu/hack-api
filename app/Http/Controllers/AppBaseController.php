@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\Auth;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Response;
 
@@ -18,6 +19,8 @@ use Response;
  */
 class AppBaseController extends Controller
 {
+    use Auth;
+
     public function sendResponse($result, $message)
     {
         return Response::json(ResponseUtil::makeResponse($message, $result));

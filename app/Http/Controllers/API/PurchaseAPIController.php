@@ -55,6 +55,8 @@ class PurchaseAPIController extends AppBaseController
     public function store(CreatePurchaseAPIRequest $request)
     {
         $input = $request->all();
+        $input['buyer_id'] = $this->getAuthUser(2);
+        $input['status'] = 'Payed';
 
         $purchase = $this->purchaseRepository->create($input);
 
@@ -134,5 +136,12 @@ class PurchaseAPIController extends AppBaseController
         $purchase->delete();
 
         return $this->sendResponse($id, 'Purchase deleted successfully');
+    }
+
+    public function purchasesByUser($user_id)
+    {
+        $purchases = Purchase::where('buyer_id', $user_id)->all();
+
+        return $this->sendResponse($purchases, 'Purchases retrieved successfully');
     }
 }

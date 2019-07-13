@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Models\Listing;
+use App\Models\Purchase;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -127,5 +129,14 @@ class UserAPIController extends AppBaseController
         $user->delete();
 
         return $this->sendResponse($id, 'User deleted successfully');
+    }
+
+    public function profile($id)
+    {
+        $user = User::find($id)->toArray();
+        $user['total_listings'] = Listing::where('seller_id', $id)->count();
+        $user['total_purchases'] = Purchase::where('buyer_id', $id)->count();
+
+        return $this->sendResponse($user, 'User Profile retrieved');
     }
 }

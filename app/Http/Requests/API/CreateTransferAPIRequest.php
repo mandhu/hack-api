@@ -24,6 +24,6 @@ class CreateTransferAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Transfer::$rules;
+        return [];
     }
 }

@@ -6,21 +6,22 @@ use App\Events\NewTransaction;
 use App\Listeners\Transect;
 use App\Models\Listing;
 use App\Models\Promotion;
+use App\Models\Refund;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PromotionRepository
+ * Class RefundRepository
  * @package App\Repositories
  * @version July 13, 2019, 10:04 am UTC
 */
 
-class PromotionRepository extends BaseRepository
+class RefundRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'type',
+        'remarks',
         'amount'
     ];
 
@@ -39,15 +40,6 @@ class PromotionRepository extends BaseRepository
      **/
     public function model()
     {
-        return Promotion::class;
-    }
-
-    public function promote(Listing $listing)
-    {
-        $promotion = new Promotion();
-        $promotion->listing_id = $listing->id;
-        $promotion->save();
-
-        event(new NewTransaction($promotion));
+        return Refund::class;
     }
 }

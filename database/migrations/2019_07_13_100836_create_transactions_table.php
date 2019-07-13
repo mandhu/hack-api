@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('amount', 255);
             $table->integer('transactionable_id');
             $table->string('transactionable_type');
+            $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

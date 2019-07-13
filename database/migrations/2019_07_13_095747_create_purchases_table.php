@@ -17,6 +17,10 @@ class CreatePurchasesTable extends Migration
             $table->increments('id');
             $table->integer('buyer_id')->unsigned();
             $table->integer('listing_id')->unsigned();
+            $table->integer('quantity');
+            $table->string('status');
+            $table->text('review')->nullable();
+            $table->integer('rating');
             $table->timestamps();
             $table->softDeletes();
 //            $table->foreign('buyer_id')->references('id')->on('users');

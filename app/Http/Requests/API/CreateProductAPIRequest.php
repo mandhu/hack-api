@@ -24,6 +24,6 @@ class CreateProductAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Product::$rules;
+        return [];
     }
 }

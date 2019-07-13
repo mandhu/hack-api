@@ -24,6 +24,6 @@ class UpdatePromotionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Promotion::$rules;
+        return [];
     }
 }

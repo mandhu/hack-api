@@ -16,9 +16,6 @@ class CreatePromotionsTable extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('listing_id')->unsigned();
-            $table->timestamp('expires_at');
-            $table->string('type', 255);
-            $table->string('amount');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('listing_id')->references('id')->on('listings');

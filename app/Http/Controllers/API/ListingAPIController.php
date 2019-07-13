@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateListingAPIRequest;
 use App\Http\Requests\API\UpdateListingAPIRequest;
 use App\Models\Listing;
+use App\Models\Promotion;
 use App\Repositories\ListingRepository;
+use App\Repositories\PromotionRepository;
+use App\Traits\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -17,12 +20,18 @@ use Response;
 
 class ListingAPIController extends AppBaseController
 {
+    use Auth;
+
     /** @var  ListingRepository */
     private $listingRepository;
 
-    public function __construct(ListingRepository $listingRepo)
+    /** @var  PromotionRepository */
+    private $promotionRepository;
+
+    public function __construct(ListingRepository $listingRepo, PromotionRepository $promotionRepository)
     {
         $this->listingRepository = $listingRepo;
+        $this->promotionRepository = $promotionRepository;
     }
 
     /**
@@ -55,7 +64,14 @@ class ListingAPIController extends AppBaseController
     {
         $input = $request->all();
 
+        $input['seller_id'] = $this->getAuthUser(3);
+        $input['status'] = 'Active';
+
         $listing = $this->listingRepository->create($input);
+
+        if ($request->get('promote')) {
+            $this->promotionRepository->promote($listing);
+        }
 
         return $this->sendResponse($listing->toArray(), 'Listing saved successfully');
     }
@@ -127,5 +143,20 @@ class ListingAPIController extends AppBaseController
         $listing->delete();
 
         return $this->sendResponse($id, 'Listing deleted successfully');
+    }
+
+    public function cancel($id)
+    {
+        /** @var Listing $listing */
+        $listing = $this->listingRepository->find($id);
+
+        if (empty($listing)) {
+            return $this->sendError('Listing not found');
+        }
+
+        $listing->status = 'Cancelled';
+        $listing->save();
+
+        return $this->sendResponse($listing, 'Listing Cancelled');
     }
 }

@@ -24,6 +24,6 @@ class UpdateCategoryAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Category::$rules;
+        return [];
     }
 }

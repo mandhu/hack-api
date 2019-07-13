@@ -24,6 +24,6 @@ class UpdateListingAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Listing::$rules;
+        return [];
     }
 }

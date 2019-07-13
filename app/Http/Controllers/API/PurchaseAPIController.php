@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\NewTransaction;
 use App\Http\Requests\API\CreatePurchaseAPIRequest;
 use App\Http\Requests\API\UpdatePurchaseAPIRequest;
 use App\Models\Purchase;
@@ -57,6 +58,8 @@ class PurchaseAPIController extends AppBaseController
 
         $purchase = $this->purchaseRepository->create($input);
 
+        event(new NewTransaction($purchase));
+
         return $this->sendResponse($purchase->toArray(), 'Purchase saved successfully');
     }
 
@@ -101,6 +104,10 @@ class PurchaseAPIController extends AppBaseController
         }
 
         $purchase = $this->purchaseRepository->update($input, $id);
+
+        if ($request->get('delivered')) {
+            event(new NewTransaction($purchase));
+        }
 
         return $this->sendResponse($purchase->toArray(), 'Purchase updated successfully');
     }

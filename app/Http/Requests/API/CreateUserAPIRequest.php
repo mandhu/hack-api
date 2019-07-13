@@ -24,6 +24,6 @@ class CreateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return User::$rules;
+        return [];
     }
 }

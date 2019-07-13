@@ -24,6 +24,6 @@ class CreateListingAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Listing::$rules;
+        return [];
     }
 }

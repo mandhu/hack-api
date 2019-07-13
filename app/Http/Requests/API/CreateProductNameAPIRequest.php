@@ -24,6 +24,6 @@ class CreateProductNameAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return ProductName::$rules;
+        return [];
     }
 }

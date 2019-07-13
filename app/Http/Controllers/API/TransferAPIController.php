@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\NewTransaction;
 use App\Http\Requests\API\CreateTransferAPIRequest;
 use App\Http\Requests\API\UpdateTransferAPIRequest;
 use App\Models\Transfer;
@@ -56,6 +57,8 @@ class TransferAPIController extends AppBaseController
         $input = $request->all();
 
         $transfer = $this->transferRepository->create($input);
+
+        event(New NewTransaction($transfer));
 
         return $this->sendResponse($transfer->toArray(), 'Transfer saved successfully');
     }

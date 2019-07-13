@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use App\Models\Category;
+use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserRequest extends FormRequest
+class UpdateCategoryAPIRequest extends APIRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,6 +24,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        return User::$rules;
+        return Category::$rules;
     }
 }

@@ -1,0 +1,59 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "listing_id",
+        "dbType": "integer:unsigned:foreign,listings,id",
+        "htmlType": "text",
+        "relation": "mt1,Listing,listing_id,id"
+    },
+    {
+        "name": "expires_at",
+        "dbType": "timestamp"
+    },
+    {
+        "name": "type",
+        "dbType": "string,255",
+        "validations": "required:string",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "amount",
+        "dbType": "string",
+        "validations": "required:string",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]

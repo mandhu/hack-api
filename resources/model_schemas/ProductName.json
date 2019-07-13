@@ -1,0 +1,54 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "name",
+        "dbType": "string,255",
+        "validations": "required:string",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "description",
+        "dbType": "text",
+        "validations": "required:string",
+        "htmlType": "text"
+    },
+    {
+        "name": "product_id",
+        "dbType": "integer:unsigned:foreign,products,id",
+        "htmlType": "text",
+        "relation": "mt1,Product,product_id,id"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]

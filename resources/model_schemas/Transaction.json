@@ -1,0 +1,53 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "amount",
+        "dbType": "string,255",
+        "validations": "required:string",
+        "htmlType": "text"
+    },
+    {
+        "name": "transactionable_id",
+        "dbType": "integer",
+        "validations": "required",
+        "htmlType": "text"
+    },
+    {
+        "name": "transactionable_type",
+        "dbType": "string",
+        "validations": "required",
+        "htmlType": "text"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]

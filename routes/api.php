@@ -36,4 +36,4 @@ Route::resource('transactions', 'TransactionAPIController');
 
 Route::resource('transfers', 'TransferAPIController');
 
-Route::put('upload', 'API/UploadController@uploadToS3');
+Route::post('upload', 'UploadController@uploadToS3');

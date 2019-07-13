@@ -3,29 +3,35 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
+use Aws\S3\MultipartUploader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UploadController extends AppBaseController
 {
     public function uploadToS3(Request $request)
     {
-        if (!$request->hasFile('file')) {
-            $this->sendError('No files found');
+        if (!$request->has('file')) {
+            return $this->sendError('No files found');
         }
-        $file = $request->file('file');
-        if (!$file->isValid()) {
-            $this->sendError('No seems corrupted');
+        $file = $request->get('file');
+        if ($file == null) {
+            return $this->sendError('Invalid file uploaded');
         }
-        $path = 'attachments';
-        $name = Str::random(20) . $file->guessExtension();
-        if ($file->storePubliclyAs($path, $name)) {
+        $path = '';
+        $name = Str::random(20) . '.jpeg';
+        $full_name = $path . '/' . $name;
+
+        //$uploader = new MultipartUploader();
+        if (Storage::disk('public')->put($full_name, $file, 'public')) {
             $data = [
-                'url' => config('filesystems.disks.s3.url').$path.'/'.$name,
+                'url' => config('filesystems.disks.public.url').$full_name,
             ];
-            $this->sendResponse($data, 'File uploaded successfully');
+            return $this->sendResponse($data, 'File uploaded successfully');
         } else {
-            return $this->sendError('An error occured while uploading to S3', 500);
+            return $this->sendError('An error occurred while uploading to S3', 500);
         }
     }
 }

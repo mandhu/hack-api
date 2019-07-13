@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version July 13, 2019, 10:19 am UTC
  *
- * @property \App\Models\User user
+ * @property User user
  * @property string amount
  * @property string type
  * @property integer user_id
@@ -58,6 +58,6 @@ class Transfer extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

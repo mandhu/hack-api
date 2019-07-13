@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version July 13, 2019, 9:56 am UTC
  *
- * @property \App\Models\Seller seller
- * @property \App\Models\Product product
+ * @property Seller seller
+ * @property Product product
  * @property integer seller_id
  * @property integer product_id
  * @property string price
@@ -68,7 +68,7 @@ class Listing extends Model
      **/
     public function seller()
     {
-        return $this->belongsTo(\App\Models\Seller::class, 'seller_id', 'id');
+        return $this->belongsTo(Seller::class, 'seller_id', 'id');
     }
 
     /**
@@ -76,6 +76,6 @@ class Listing extends Model
      **/
     public function product()
     {
-        return $this->belongsTo(\App\Models\Product::class, 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

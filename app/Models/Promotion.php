@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version July 13, 2019, 10:04 am UTC
  *
- * @property \App\Models\Listing listing
+ * @property Listing listing
  * @property integer listing_id
  * @property string expires_at
  * @property string type
@@ -60,6 +60,6 @@ class Promotion extends Model
      **/
     public function listing()
     {
-        return $this->belongsTo(\App\Models\Listing::class, 'listing_id', 'id');
+        return $this->belongsTo(Listing::class, 'listing_id', 'id');
     }
 }

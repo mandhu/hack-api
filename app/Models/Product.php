@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version July 13, 2019, 9:05 am UTC
  *
- * @property \App\Models\Category category
+ * @property Category category
  * @property string name
  * @property integer category_id
  */
@@ -54,6 +54,6 @@ class Product extends Model
      **/
     public function category()
     {
-        return $this->belongsTo(\App\Models\Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

@@ -46,7 +46,9 @@ class ListingAPIController extends AppBaseController
     {
 //        $this->listingRepository->pushCriteria(new RequestCriteria($request));
 //        $this->listingRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $listings = $this->listingRepository->with(['product.category', 'seller'])->all();
+        $listings = Listing::with(['product.category', 'seller'])->whereHas('product', function ($query) use ($request){
+            $query->where('name', 'like', $request->get('search'));
+        })->get();
 
         return $this->sendResponse($listings->toArray(), 'Listings retrieved successfully');
     }

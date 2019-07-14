@@ -35,9 +35,9 @@ class NotifySubscribers
                 'included_segments' => array(
                     'All'
                 ),
-                'data' => array(
+                'data' => json_encode([
                     'listing' => $listing
-                ),
+                ]),
                 'contents' => []
             ],
             'headers' => [

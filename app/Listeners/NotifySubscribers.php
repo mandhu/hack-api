@@ -32,13 +32,16 @@ class NotifySubscribers
         $options = [
             'form_params' => [
                 'app_id' => "f36282db-c240-4226-b685-25fe5c763668",
-                'included_segments' => array(
+                'included_segments' => [
                     'All'
-                ),
+                ],
+                'large_icon' =>"ic_launcher_round.png",
                 'data' => [
                     'listing' => $listing
                 ],
-                'contents' => []
+                'contents' => $content = [
+                    "en" => 'Testing Message'
+                ],
             ],
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',

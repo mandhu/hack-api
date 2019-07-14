@@ -31,7 +31,7 @@ class NotifySubscribers
         $listing = $event->listing;
         try {
             $content = [
-                "en" => $listing->quantity . " " . $listing->product->name . ($listing->quantity > 1 ? 's' : '') . " for $" . $listing->price
+                "en" => $listing->quantity . " " . $listing->product->name . ($listing->quantity > 1 ? 's' : '') . " for $" . $listing->price . " each"
             ];
             $heading = [
                 "en" => 'New item listed.'

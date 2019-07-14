@@ -21,18 +21,19 @@ class UploadController extends AppBaseController
             return $this->sendError('Invalid file uploaded');
         }
         $path = '';
-        $name = Str::random(20) . '.jpeg';
+        $name = uniqid('image') . '.jpeg';
         $full_name = $path . '/' . $name;
 
+        \Image::make($file)->save('storage' . $full_name, 70);
+
         //$uploader = new MultipartUploader();
-        if (Storage::disk('public')->put($full_name, $file, 'public')) {
+        if (Storage::disk('public')->exists($full_name)) {
             $data = [
                 'url' => $full_name,
-//                'url' => config('filesystems.disks.public.url').$full_name,
             ];
             return $this->sendResponse($data, 'File uploaded successfully');
         } else {
-            return $this->sendError('An error occurred while uploading to S3', 500);
+            return $this->sendError('An error occurred while uploading file', 500);
         }
     }
 }

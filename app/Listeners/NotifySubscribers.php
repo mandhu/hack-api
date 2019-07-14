@@ -30,12 +30,12 @@ class NotifySubscribers
     {
         $listing = $event->listing;
         $options = [
-            'body' => [
+            'form_params' => [
                 'app_id' => "f36282db-c240-4226-b685-25fe5c763668",
                 'included_segments' => array(
                     'All'
                 ),
-                'form_params' => [
+                'data' => [
                     'listing' => $listing
                 ],
                 'contents' => []

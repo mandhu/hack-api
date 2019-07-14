@@ -30,17 +30,23 @@ class NotifySubscribers
     {
         $listing = $event->listing;
         try {
-            $content = array(
-                "en" => 'Testing Message'
-            );
+            $content = [
+                "en" => $listing->quantity . " " . $listing->product->name . ($listing->quantity > 1 ? 's' : '') . " for $" . $listing->price
+            ];
+            $heading = [
+                "en" => 'New item listed.'
+            ];
 
-            $fields = array(
+            $fields = [
                 'app_id' => "f36282db-c240-4226-b685-25fe5c763668",
                 'included_segments' => array('All'),
-                'data' => array("foo" => "bar"),
+                'data' => [
+                    'listing' => $listing
+                ],
                 'large_icon' =>"ic_launcher_round.png",
-                'contents' => $content
-            );
+                'contents' => $content,
+                'headings' => $heading
+            ];
 
             $fields = json_encode($fields);
             print("\nJSON sent:\n");
@@ -65,9 +71,4 @@ class NotifySubscribers
         }
 
     }
-
-//    MGQ3MTIxZDUtNWQwOS00NWYyLWI4MGQtYzUwZjg0NGYyYzJk
-
-
-//  f36282db-c240-4226-b685-25fe5c763668
 }

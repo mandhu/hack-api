@@ -44,8 +44,8 @@ class ListingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-//        $this->listingRepository->pushCriteria(new RequestCriteria($request));
-//        $this->listingRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $this->listingRepository->pushCriteria(new RequestCriteria($request));
+        $this->listingRepository->pushCriteria(new LimitOffsetCriteria($request));
         $listings = $this->listingRepository->with(['product', 'product.category', 'seller'])->all();
 
         return $this->sendResponse($listings->toArray(), 'Listings retrieved successfully');

@@ -27,7 +27,8 @@ class UploadController extends AppBaseController
         //$uploader = new MultipartUploader();
         if (Storage::disk('public')->put($full_name, $file, 'public')) {
             $data = [
-                'url' => config('filesystems.disks.public.url').$full_name,
+                'url' => $full_name,
+//                'url' => config('filesystems.disks.public.url').$full_name,
             ];
             return $this->sendResponse($data, 'File uploaded successfully');
         } else {

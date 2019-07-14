@@ -20,13 +20,14 @@ class Listing extends Model
         'product_id',
         'price',
         'quantity',
+        'image',
         'status',
         'expires_at'
     ];
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class, 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 
     public function product()

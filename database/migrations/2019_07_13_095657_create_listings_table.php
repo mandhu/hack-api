@@ -19,7 +19,7 @@ class CreateListingsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->string('price', 255);
             $table->integer('quantity');
-            $table->integer('status')->default(0);
+            $table->string('status');
             $table->timestamp('expires_at')->nullable();
             $table->text('image')->nullable();
             $table->timestamps();

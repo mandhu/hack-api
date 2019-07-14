@@ -11,7 +11,7 @@ use App\Repositories\BaseRepository;
  * @version July 13, 2019, 9:56 am UTC
 */
 
-class ListingRepository extends BaseRepository
+class ListingRepository extends \Prettus\Repository\Eloquent\BaseRepository
 {
     /**
      * @var array

@@ -27,3 +27,7 @@ Route::post('upload', 'UploadController@upload');
 Route::get('user_listings{id}', 'ListingAPIController@listingsByUser');
 Route::get('user_purchases/{id}', 'PurchaseAPIController@purchasesByUser');
 Route::get('user_profile/{$id}', 'UserAPIController@profile');
+
+Route::post('subscribe', 'SubscriptionAPIController@subscribe');
+Route::get('user_subscriptions/{id}', 'SubscriptionAPIController@userSubscriptions');
+Route::get('product_subscriptions/{id}', 'SubscriptionAPIController@productSubscriptions');

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateListingAPIRequest;
 use App\Http\Requests\API\UpdateListingAPIRequest;
 use App\Models\Listing;
+use App\Models\Product;
 use App\Models\Promotion;
 use App\Repositories\ListingRepository;
 use App\Repositories\PromotionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use InfyOm\Generator\Criteria\LimitOffsetCriteria;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
  * Class ListingController
@@ -40,11 +43,9 @@ class ListingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $listings = $this->listingRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+//        $this->listingRepository->pushCriteria(new RequestCriteria($request));
+//        $this->listingRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $listings = $this->listingRepository->with(['product.category', 'seller'])->all();
 
         return $this->sendResponse($listings->toArray(), 'Listings retrieved successfully');
     }
@@ -56,14 +57,22 @@ class ListingAPIController extends AppBaseController
      * @param CreateListingAPIRequest $request
      *
      * @return Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(CreateListingAPIRequest $request)
     {
         $input = $request->all();
 
+//        $category_id = $request->category_id ? $request->category_id : 1;
+//        $product = Product::firstOrCreate(['name' => $request->product_id, 'category_id' => $category_id]);
+//        $input['product_id'] = $product->id;
+
+
         $input['seller_id'] = $this->getAuthUser(3);
         $input['status'] = 'Active';
         $input['expires_at'] = now()->addDays(2);
+
+//        return $input;
 
         $listing = $this->listingRepository->create($input);
 
@@ -85,7 +94,7 @@ class ListingAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Listing $listing */
-        $listing = $this->listingRepository->find($id);
+        $listing = $this->listingRepository->with(['product.category', 'seller'])->find($id);
 
         if (empty($listing)) {
             return $this->sendError('Listing not found');
@@ -160,7 +169,7 @@ class ListingAPIController extends AppBaseController
 
     public function listingsByUser($user_id)
     {
-        $listings = Listing::where('seller_id', $user_id)->all();
+        $listings = Listing::where('seller_id', $user_id)->with(['product.category', 'seller'])->all();
 
         return $this->sendResponse($listings, 'Listings retrieved successfully');
     }

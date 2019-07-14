@@ -40,11 +40,30 @@ class BaseSeeder extends Seeder
             [
                 'name' => 'Reef Fish',
             ],
+            [
+                'name' => 'Vegetables',
+            ],
         ]);
 
         \App\Models\Product::insert([
             [
                 'name' => 'Red Snapper',
+                'category_id' => 1,
+            ],
+            [
+                'name' => 'Tomato',
+                'category_id' => 2,
+            ],
+            [
+                'name' => 'Cabbage',
+                'category_id' => 2,
+            ],
+            [
+                'name' => 'Octopus',
+                'category_id' => 1,
+            ],
+            [
+                'name' => 'Grouper',
                 'category_id' => 1,
             ]
         ]);

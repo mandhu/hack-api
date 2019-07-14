@@ -20,7 +20,7 @@ class ListingRepository extends \Prettus\Repository\Eloquent\BaseRepository
         'price',
         'quantity',
         'status',
-        'product.name'
+        'product.name' => 'like'
     ];
 
     /**

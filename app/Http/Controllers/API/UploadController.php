@@ -20,11 +20,13 @@ class UploadController extends AppBaseController
         if ($file == null) {
             return $this->sendError('Invalid file uploaded');
         }
-        $path = '';
-        $name = uniqid('image') . '.jpeg';
-        $full_name = $path . '/' . $name;
+        $temp_name = '/' . uniqid('temp') . '.jpeg';
+        $full_name = '/' . uniqid('image') . '.jpeg';
 
-        \Image::make($file)->save('storage' . $full_name, 70);
+        Storage::disk('public')->put($temp_name, $file);
+
+        \Image::make(storage_path('app/public') . $temp_name)->save(storage_path('app/public') . $full_name, 70);
+        Storage::disk('public')->delete($temp_name);
 
         //$uploader = new MultipartUploader();
         if (Storage::disk('public')->exists($full_name)) {

@@ -31,3 +31,5 @@ Route::get('user_profile/{$id}', 'UserAPIController@profile');
 Route::post('subscribe', 'SubscriptionAPIController@subscribe');
 Route::get('user_subscriptions/{id}', 'SubscriptionAPIController@userSubscriptions');
 Route::get('product_subscriptions/{id}', 'SubscriptionAPIController@productSubscriptions');
+
+Route::post('push_token', 'UserAPIController@setUserPushToken');

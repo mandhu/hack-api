@@ -139,4 +139,17 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user, 'User Profile retrieved');
     }
+
+    public function setUserPushToken(Request $request)
+    {
+        if (!$request->has('user_id') || !$request->has('push_token')) {
+            return $this->sendError('required fields missing', 400);
+        }
+
+        $user = User::find($request->get('user_id'));
+        $user->push_token = $request->get('push_token');
+        $user->save();
+
+        return $this->sendResponse($request->all(), 'User push token set.');
+    }
 }

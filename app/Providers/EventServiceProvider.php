@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
 //        ],
         'App\Events\NewTransaction' => [
             'App\Listeners\Transect'
+        ],
+        'App\Events\NewListing' => [
+            'App\Listeners\NotifySubscribers'
         ]
     ];
 

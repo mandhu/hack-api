@@ -19,7 +19,8 @@ class ListingRepository extends \Prettus\Repository\Eloquent\BaseRepository
     protected $fieldSearchable = [
         'price',
         'quantity',
-        'status'
+        'status',
+        'product.name'
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\NewListing;
 use App\Http\Requests\API\CreateListingAPIRequest;
 use App\Http\Requests\API\UpdateListingAPIRequest;
 use App\Models\Listing;
@@ -79,6 +80,8 @@ class ListingAPIController extends AppBaseController
         if ($request->get('promote')) {
             $this->promotionRepository->promote($listing);
         }
+
+        event(new NewListing($listing));
 
         return $this->sendResponse($listing->toArray(), 'Listing saved successfully');
     }

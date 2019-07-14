@@ -25,7 +25,7 @@ class UploadController extends AppBaseController
 
         Storage::disk('public')->put($temp_name, $file);
 
-        \Image::make(storage_path('app/public') . $temp_name)->save(storage_path('app/public') . $full_name, 70);
+        \Image::make(storage_path('app/public') . $temp_name)->orientate()->save(storage_path('app/public') . $full_name, 70);
         Storage::disk('public')->delete($temp_name);
 
         //$uploader = new MultipartUploader();
